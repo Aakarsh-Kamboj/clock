@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Clock</title>
+    <link rel="icon" href="favicon-32x32.png">
+    <style>
+        body {
+            margin: 0px;
+        }
+
+        .container {
+            position: relative;
+            background: url('watch2.jpg');
+            height: 50vw;
+            width: 50vw;
+            background-size: cover;
+            margin: auto;
+        }
+
+        #color {
+            position: absolute;
+            top: 41%;
+            left: 43.3%;
+            background-color: transparent;
+            border: 1px solid white;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #color:hover {
+            color: wheat;
+            border-color: wheat;
+        }
+
+        #timeDisplay {
+            position: absolute;
+            top: 55%;
+            left: 40.2%;
+            color: white;
+            font-size: 35px;
+        }
+
+        .stopWatch {
+            position: absolute;
+            top: 67%;
+            left: 44%;
+            background-color: transparent;
+            border: 1px solid white;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .stopWatch:hover {
+            color: wheat;
+            border-color: wheat;
+        }
+
+        @media only screen and (max-width: 400px) {
+            .container {
+                position: relative;
+                top: 100px;
+                right: 22px;
+                height: 115vw;
+                width: 115vw;
+            }
+
+            #color {
+                position: absolute;
+                top: 42%;
+                left: 38%;
+                background-color: transparent;
+                border: 1px solid white;
+                color: white;
+                font-size: 14px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            #timeDisplay {
+                position: absolute;
+                top: 55%;
+                left: 38%;
+                color: white;
+                font-size: 26px;
+            }
+
+            .stopWatch {
+                position: absolute;
+                top: 67%;
+                left: 40%;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button id="color">Change color</button>
+        <div id="timeDisplay"></div>
+        <form action="stop.html" target="_parent">
+            <input type="submit" value="Stopwatch" class="stopWatch">
+        </form>
+    </div>
+    <script>
+        let disTime;
+        let dt;
+        let hours;
+        let minutes;
+        let amORpm;
+        let fTime;
+        let cnt = 0;
+        let changeColor;
+        setInterval(() => {
+            disTime = document.getElementById('timeDisplay');
+            dt = new Date();
+            hours = dt.getHours();
+            minutes = dt.getMinutes();
+            amORpm = hours >= 12 ? "PM" : "AM";
+            hours = (hours % 12) || 12;
+            if(minutes<10){
+                fTime = hours + " : 0" + minutes + " " + amORpm;    
+            }
+            else{
+                fTime = hours + " : " + minutes + " " + amORpm;
+            }
+            disTime.innerHTML = fTime;
+        }, 1000);
+        changeColor = document.getElementById('color');
+        changeColor.addEventListener('click', () => {
+            cnt++;
+            if (cnt % 7 == 1) {
+                disTime.style.color = "cornflowerblue";
+            }
+            else if (cnt % 7 == 2) {
+                disTime.style.color = "lightgreen";
+            }
+            else if (cnt % 7 == 3) {
+                disTime.style.color = "gold";
+            }
+            else if (cnt % 7 == 4) {
+                disTime.style.color = "hotpink";
+            }
+            else if (cnt % 7 == 5) {
+                disTime.style.color = "orchid";
+            }
+            else if (cnt % 7 == 6) {
+                disTime.style.color = "orangered";
+            }
+            else {
+                disTime.style.color = "white";
+            }
+        });
+    </script>
+</body>
+
+</html>
